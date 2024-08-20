@@ -19,7 +19,7 @@ function Form() {
       submitStatus: false,
    });
    const [queryType, setQueryType] = useState({
-      selected: '',
+      value: '',
       status: true,
       submitStatus: false,
    });
@@ -29,6 +29,7 @@ function Form() {
       submitStatus: false,
    });
    const [rule, setRule] = useState({
+      value: 'accept',
       status: true,
       submitStatus: false,
    });
@@ -77,7 +78,7 @@ function Form() {
 
    const queryTypeValidation = (selected) => {
       setQueryType({
-         selected,
+         value: selected,
          status: true,
          submitStatus: true,
       });
@@ -104,6 +105,7 @@ function Form() {
       const bol = e.target.checked;
 
       setRule({
+         value: 'accept',
          status: bol,
          submitStatus: bol,
       });
@@ -143,7 +145,10 @@ function Form() {
          setAlert({ ...subList[i].state, status: false });
       });
       if (!notReady.length) {
+         let result = [];
          setSubmitSuccessful(true);
+         subList.map((i) => result.push(i.state.value));
+         console.log(result);
       }
    };
 
@@ -269,7 +274,7 @@ function Form() {
                   <div className="grid grid-cols-2 gap-5">
                      <div
                         className={`col-span-2 md:col-span-1 flex justify-left items-center border border-slate-400 ${
-                           queryType.selected === 'general-enquiry' &&
+                           queryType.value === 'general-enquiry' &&
                            'border-teal-700 bg-green-700/20'
                         } rounded-lg`}
                      >
@@ -291,7 +296,7 @@ function Form() {
                      </div>
                      <div
                         className={`col-span-2 md:col-span-1 flex justify-left items-center border border-slate-400 ${
-                           queryType.selected === 'support-request' &&
+                           queryType.value === 'support-request' &&
                            'border-teal-700 bg-green-700/20'
                         } rounded-lg`}
                      >
